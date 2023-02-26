@@ -1,0 +1,48 @@
+#!/data/data/com.termux/files/usr/bin/env python
+
+import os
+
+# Print blue banner
+print("\033[34m")
+print("╔═╦═════════╦═╗")
+print("╠═╬═███████═╬═╣")
+print("╠═███████████═╣")
+print("███████████████")
+print("███████████████")
+print("███████████████")
+print("███████████████")
+print("╠════█████════╣ T")
+print("█═════███═════█ O")
+print("███════█════███ X")
+print("███████═███████ I")
+print("║█████═══█████║ C")
+print("╠═███═════███═╣")
+print("╠═╣█████████╠═╣ B")
+print("╠═███████████═╣ O")
+print("╠═╣█║█║█║█║█╠═╣ E")
+print("╠═╣█║█║█║█║█╠═╣")
+print("╚═╩═╩═╩═╩═╩═╩═╝")
+print("Termux-package installer")
+print("\033[0m")
+
+# List of packages to install
+packages = ['update', 'upgrade', 'python', 'git', 'wget', 'nano', 'python', 'python-dev', 'python2', 'python2-dev', 'ruby', 'curl', 'openssh', 'openssl', 'figlet', 'fish', 'nodejs', 'openssh', 'cowsay', 'ruby', 'weechat-python-plugin', 'python-tkinter', 'unzip', 'zip', 'cmatrix', 'neofetch', 'clang', 'termux-api', 'golang', ' fftw', 'libzmq', 'libzmq-dev', 'freetype', 'freetype-dev', 'libpng', 'libpng-dev']
+
+# Install packages using pkg command, skipping packages that are already installed
+for package in packages:
+    result = os.system(f"dpkg-query -W -f='${{Status}}' {package} | grep -q 'ok installed'")
+    if result == 0:
+        print(f"{package} is already installed")
+    else:
+        os.system(f'pkg install -y {package}')
+
+# List of packages to install with pip
+pip_packages = ['numpy', 'pandas', 'matplotlib']
+
+# Install packages using pip command, skipping packages that are already installed
+for package in pip_packages:
+    result = os.system(f"pip show {package} > /dev/null")
+    if result == 0:
+        print(f"{package} is already installed")
+    else:
+        os.system(f'pip install {package}')
